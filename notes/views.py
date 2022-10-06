@@ -24,11 +24,6 @@ def create_note(request):
     context = {'form': form}
     return render(request, 'notes/create_note.html', context)
 
-def view_note(request, note_id):
-    note = Note.objects.get(id=note_id)
-    context = {'note': note}
-    return render(request, 'notes/view_note.html', context)
-
 def delete_note(request, note_id):
     print(f'Note_id: {note_id}')
     note = Note.objects.get(id=note_id)
@@ -37,7 +32,6 @@ def delete_note(request, note_id):
 
 def edit_note(request, note_id):
     note = Note.objects.get(id=note_id)
-    print(note.text)
     if request.method == 'POST':
         form_data = request.POST
         note.title = form_data['title']

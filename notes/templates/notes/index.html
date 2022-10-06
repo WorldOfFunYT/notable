@@ -38,7 +38,7 @@
     <div class="column note-container">
       {% for note in notes %}
       <div>
-        <a href="{% url 'notes:view_note' note.id %}" class="box note has-background-grey-darker has-text-light"
+        <a href="{% url 'notes:edit_note' note.id %}" class="box note has-background-grey-darker has-text-light"
           ><span class="note-title subtitle has-text-light"
             ><b>{{ note.title }}</b></span
           ><br />

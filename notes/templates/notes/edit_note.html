@@ -48,6 +48,7 @@
             </div>
             {% comment %} {{ form }} {% endcomment %}
             <input type="submit" class="button is-primary is-outlined is-fullwidth is-rounded" value="Create Note">
+            <a href="{% url 'notes:delete_note' note.id %}"><button class="button is-danger is-outlined is-fullwidth is-rounded">Delete</button></a>
         </form>
     </div>
   </body>
