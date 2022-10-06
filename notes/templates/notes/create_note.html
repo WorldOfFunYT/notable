@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create note - Notable</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"
+      integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'notes\style.css' %}?123" />
+  </head>
+  <body class="columns has-background-black-ter">
+    <div class="column menu-container is-one-quarter">
+      <div class="menu has-background-grey-darker">
+        <ul class="menu-list">
+          <li><a class="has-text-light" href="{% url 'notes:index' %}">Home</a></li>
+          <li><a class="has-text-light has-text-weight-bold" href="{% url 'notes:create_note' %}">New Note</a></li>
+          <li>
+            <a href="#createToDo" class="has-text-light">New To-do List</a>
+          </li>
+          <li><a href="#logOut" class="has-text-light">Log out</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="column form-container is-narrow">
+        <form action="{% url 'notes:create_note' %}" method="post">
+            {% csrf_token %}
+            <div class="note-title">
+                <label class="label has-text-white" for="title">Note Title</label>
+                <input name='title' type="text" id="title" class="input" placeholder="e.g. My Note" max-length="100" required>
+            </div>
+            <div class="note-content">
+                <label for="note-content" class="label has-text-white">Note Content</label>
+                <textarea name="note-content" max-length="500" id="note-content" cols="30" rows="10" class="textarea" placeholder="e.g. Hello World!" required></textarea>
+            </div>
+            {% comment %} {{ form }} {% endcomment %}
+            <input type="submit" class="button is-primary is-outlined is-fullwidth is-rounded" value="Create Note">
+        </form>
+    </div>
+  </body>
+</html>

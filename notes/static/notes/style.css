@@ -1,0 +1,62 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.note {
+  width: 300px;
+  min-height: 300px;
+}
+.big-note {
+  width: 600px;
+  min-height: 600px;
+  font-size: 2em;
+}
+
+.note-container {
+  flex-direction: row;
+  flex-wrap: wrap;
+  display: flex;
+  gap: 15px;
+  height: fit-content;
+  padding: 30px;
+  justify-content: center;
+}
+
+form > * {
+  margin-bottom: 1em;
+}
+
+.menu {
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  height: 100%;
+  width: 100%;
+  border-radius: 0 10px 10px 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+body {
+  min-height: 101.3vh;
+  position: relative;
+}
+
+.menu-list a:hover {
+  background-color: #333;
+  color: #f5f5f5 !important;
+}
+
+.menu-container {
+  position: sticky;
+  top: 0;
+  padding: 0;
+  padding-left: 12px;
+  /* top: 0;
+  padding-top: 10px;*/
+  max-height: 100vh;
+}
