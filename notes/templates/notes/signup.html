@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notable</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"
+      integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'notes\style.css' %}" />
+  </head>
+  <body class="columns has-background-black-ter is-flex is-vcentered">
+    <div class="spacing column"></div>
+    <div class=" column is-one-half">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="notification {% if message.tags %}is-danger"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'notes:signup_user' %}" method="post">
+            {% csrf_token %}
+            <div class="username">
+                <label class="label has-text-white" for="username">Username</label>
+                <input name='username' type="text" id="username" class="input" placeholder="e.g. JohnDoe" max-length="100" value="" required>
+            </div>
+            <div class="Password">
+                <label class="label has-text-white" for="password">Password</label>
+                <input name='password' type="password" id="password" class="input" placeholder="e.g. JohnDoe" max-length="100" value="" required>
+            </div>
+            <input type="submit" class="button is-primary is-fullwidth is-rounded" value="Sign Up">
+        </form>
+        <a href="{% url 'notes:login_view' %}"><button class="button is-primary is-outlined is-fullwidth is-rounded">Log in</button></a>
+    </div>
+    <div class="spacing column"></div>
+  </body>
+</html>
