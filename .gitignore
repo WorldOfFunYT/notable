@@ -1,0 +1,7 @@
+venv
+notes/migrations
+notes/__pycache__
+todolist/__pycache__
+todolist/migrations
+db.sqlite3
+notable/__pycache__

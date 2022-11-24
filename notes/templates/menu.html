@@ -1,0 +1,17 @@
+<ul class="menu-list">
+    <li style="position: relative;">
+        <a class="has-text-light" href="{% url 'notes:index' %}">Notes</a>
+        <a style="position: absolute; right: 0; top: 0;" href="{% url 'notes:create_note' %}">
+            <i class="icon fa-solid fa-plus has-text-white"></i>
+        </a>
+    </li>
+    <li style="position:relative;">
+        <a class="has-text-light" href="{% url 'todo:index' %}">To-do Lists</a>
+        <a style="position: absolute; right: 0; top: 0;" href="#createToDoList">
+            <i class="icon fa-solid fa-plus has-text-white"></i>
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'notes:logout_user' %}" class="has-text-light">Log out</a>
+    </li>
+</ul>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notable</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"
+          integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'notes\style.css' %}" />
+  </head>
+  <body class="columns has-background-black-ter">
+    <div class="column menu-container is-one-quarter">
+      <div class="menu has-background-grey-darker">
+        {% include 'menu.html' %}
+      </div>
+    </div>
+    <div class="column">
+      {% for list in toDoLists %}
+      <div class="box has-background-grey-darker has-text-light">
+        <strong class="has-text-light">{{ list.title }}</strong>
+        <div class="is-pulled-right">
+          <a href="" class="icon fas fa-plus has-text-success"></a>
+          <a href="#" class="icon fas fa-pen has-text-warning"></a>
+          <a href="{% url 'todo:delete_list' list.id %}" class="icon fas fa-trash-can has-text-danger"></a>
+        </div>
+        <p class="has-text-light">{{ list.description }}</p>
+          {% for item in list.item_set.all %}
+            <div class="box mt-5 is-rounded has-background-grey-dark has-text-light">
+              <a href="{% url 'todo:delete_item' item.id %}" class="icon fas fa-trash-can has-text-danger"></a>
+              <a href="#" class="icon fas fa-pen has-text-warning"></a>
+              {{ item.title }}
+              <div class="is-pulled-right">
+                <a href="{% url 'todo:toggle_item' item.id %}">
+                  {% if item.is_complete %}
+                      <i style="font-size: 1.5em" class="icon fa-solid fa-square-check has-text-success"></i>
+                  {% else %}
+                    <i style="font-size: 1.5em" class="icon fa-solid fa-square-xmark has-text-danger"></i>
+                  {% endif %}
+                </a> 
+                
+              </div>
+            </div>
+            {% endfor %}
+        {% if list.id == chosen_list_id %}
+        <form action="{% url 'notes:create_note' %}" method="post">
+            {% csrf_token %}
+            <div id="item_form" class="box mt-5 is-rounded has-background-grey-dark has-text-light">
+              <i class="icon fas fa-trash-can has-text-danger"></i>
+              <i class="icon fas fa-pen has-text-warning"></i>
+                <div id="form-input" class="field has-addons is-inline">
+                    <div class="control is-inline">
+                        <input name='title' type="text" id="title" class="input is-success is-rounded has-background-grey-dark has-text-light" max-length="100" required>
+                    </div>
+                    <div class="control is-inline">
+                        <button type="submit" class="button is-success is-rounded"><i class="fas fa-check"></i></button>
+                    </div>
+                </div>
+                <div class="is-pulled-right">
+                    <div>
+                        <i style="font-size: 1.5em" class="icon fa-solid fa-square-xmark has-text-danger"></i>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+
+        </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
+
+
